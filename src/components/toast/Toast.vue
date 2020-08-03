@@ -20,8 +20,8 @@
     .dialog-tips{
         position: fixed;
         z-index: 1000;
-        min-width: 220px;
-        max-width: 400px;
+        min-width: 30%;
+        max-width: 80%;
         padding: 22px 22px;
         word-break: break-all;
         box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.1);
