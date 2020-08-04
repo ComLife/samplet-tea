@@ -66,7 +66,7 @@
 
 <script>
   import NavBar from '../../components/navbar/NavBar'
-  import Scroll from '../../components/scroll/Scroll'
+  import Scroll from '../../components/scroll/BetterScroll'
   import InfoHeader from '../../components/infoHeader/InfoHeader'
   export default {
     name: 'App',

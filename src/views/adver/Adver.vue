@@ -26,7 +26,7 @@
 
 <script>
   import NavBar from '../../components/navbar/NavBar'
-  import Scroll from '../../components/scroll/Scroll'
+  import Scroll from '../../components/scroll/BetterScroll'
 
   export default {
     name: 'App',

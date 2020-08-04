@@ -1,16 +1,19 @@
 <template>
   <div id="home">
     <scroll class="content"
-            ref="scroll">
+            ref="scroll"
+            :pullup="true"
+            :pulldown="true"
+    >
       <div class="extensionBox">
-        <img  v-for="(item, index) in extensionArr" @click="toDetail" :key="index" src="../../assets/img/extension/xiangfei2.png" alt="">
+        <img  v-for="(item, index) in extensionArr" @click="toDetail" :key="index" src="../../assets/img/home/recommend_bg.jpg" alt="">
       </div>
     </scroll>
   </div>
 </template>
 
 <script>
-  import Scroll from '../../components/scroll/Scroll'
+  import Scroll from '../../components/scroll/BetterScroll'
   export default {
     name: 'App',
     components: {
@@ -18,7 +21,7 @@
     },
     data(){
       return {
-        extensionArr: [],
+        extensionArr: [1, 2, 3, 4, 5, 6, 7, 8],
       }
     },
     methods: {
@@ -51,7 +54,8 @@
     min-height: 100%;
     img{
       width: 100%;
-      height: 40px;
+      height: 200px;
+      border: 1px solid #000;
     }
   }
 
