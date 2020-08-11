@@ -5,6 +5,8 @@ const Home = () => import('../views/home/Home');
 const Profile = () => import('../views/user/User');
 const Adver = () => import('../views/adver/Adver');
 const Detail = () => import('../views/detail/Detail');
+const Login = () => import('../views/loginRegister/login/Login')
+const Register = () => import('../views/loginRegister/register/Register')
 
 // 1.安装VueRouter
 Vue.use(VueRouter)
@@ -21,7 +23,20 @@ const routes = [
   },
   {
     path: '/user',
-    component: Profile
+    redirect: 'Login',
+    component: Profile,
+    children: [
+      {
+        path: '/login',
+        name: 'Login',
+        component: Login
+      },
+      {
+        path: '/register',
+        name: 'Register',
+        component: Register
+      }
+    ]
   },
   {
     path: '/adver',
