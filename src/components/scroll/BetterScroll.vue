@@ -12,21 +12,18 @@
           <div v-show="!isPullingDown"><span>Refresh success</span></div>
         </div>
       </div>
-      <div> <!--不太需要，待优化-->
-
-        <div v-show="loadingStatus.showIcon || loadingStatus.status" class="loading-pos">
-          <div v-show="loadingStatus.showIcon" class="loading-container">
-            <div class="cube">
-              <div class="side side1"></div>
-              <div class="side side2"></div>
-              <div class="side side3"></div>
-              <div class="side side4"></div>
-              <div class="side side5"></div>
-              <div class="side side6"></div>
-            </div>
+      <div v-show="loadingStatus.showIcon || loadingStatus.status" class="loading-pos">
+        <div v-show="loadingStatus.showIcon" class="loading-container">
+          <div class="cube">
+            <div class="side side1"></div>
+            <div class="side side2"></div>
+            <div class="side side3"></div>
+            <div class="side side4"></div>
+            <div class="side side5"></div>
+            <div class="side side6"></div>
           </div>
-          <span class="loading-connecting">{{loadingStatus.status}}</span>
         </div>
+        <span class="loading-connecting">{{loadingStatus.status}}</span>
       </div>
       <slot></slot>
     </div>
@@ -37,7 +34,6 @@
 
   const TIME_BOUNCE = 800
   const TIME_STOP = 600
-  const REQUEST_TIME = 3000
   const THRESHOLD = 70
   const STOP = 56
 
@@ -144,11 +140,6 @@
       return {
         beforePullDown: true,
         isPullingDown: false,
-        loadingConnecting: false,
-        pulldownTip: {
-          text: '下拉刷新',     // 松开立即刷新
-          rotate: ''    // icon-rotate
-        },
 
       };
     },
@@ -185,21 +176,6 @@
               me.$emit('scroll', pos);
             }
 
-            // if (this.pulldown) {
-            //   // 下拉动作
-            //   if (pos.y > 50) {
-            //     this.pulldownTip = {
-            //       text: '松开立即刷新',
-            //       rotate: 'icon-rotate'
-            //     }
-            //   } else {
-            //     this.pulldownTip = {
-            //       text: '下拉刷新',     // 松开立即刷新
-            //       rotate: ''    // icon-rotate
-            //     }
-            //   }
-            // }
-
             if (this.pullup) {
               console.log('11111111111111')
             }
@@ -220,19 +196,6 @@
 
         // 是否派发顶部下拉事件，用于下拉刷新
         if (this.pulldown) {
-          // this.scroll.on('touchend', (pos) => {
-          //   // 下拉动作
-          //   if (pos.y > 50) {
-          //     setTimeout(() => {
-          //       // 重置提示信息
-          //       this.pulldownTip = {
-          //         text: '下拉刷新',     // 松开立即刷新
-          //         rotate: ''    // icon-rotate
-          //       }
-          //     },600);
-          //     this.$emit('pulldown');
-          //   }
-          // });
           this.scroll.on('pullingDown', this.pullingDownHandler)
         }
 
@@ -248,26 +211,27 @@
         this.isPullingDown = true
 
         // 这个位置就可以开始发送请求了
-        // this.$emit('pulldown');
+        this.$emit('pulldown');
 
-        setTimeout(() => {
-          this.isPullingDown = false
-          this.finishPullDown()
-        }, REQUEST_TIME)
+        // 假设调用的接口
+        setTimeout(()=>{
+          this.finishPullDown();
+        }, 1000)
 
       },
 
+      // 请求完成后需要回调的函数
       async finishPullDown() {
-        const stopTime = TIME_STOP
+        this.isPullingDown = false
         await new Promise(resolve => {
           setTimeout(() => {
             this.scroll.finishPullDown()
             resolve()
-          }, stopTime)
+          }, TIME_STOP)
         })
         setTimeout(() => {
           this.beforePullDown = true
-          this.scroll.refresh()
+          this.refresh()
         }, TIME_BOUNCE)
       },
 

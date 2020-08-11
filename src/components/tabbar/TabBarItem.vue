@@ -16,16 +16,16 @@
       }
     },
     computed: {
-			isActive() {
-				return this.$route.path.indexOf(this.link) !== -1
+      isActive() {
+        return this.$route.path.indexOf(this.link) !== -1
       },
       activeStyle() {
-				return this.isActive ? {'color': 'red'} : {}
+        return this.isActive ? {'color': 'red'} : {}
       }
     },
     methods: {
-			itemClick() {
-				this.$router.replace(this.link)
+      itemClick() {
+        this.$router.replace(this.link)
       }
     }
 	}

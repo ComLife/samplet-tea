@@ -94,6 +94,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../assets/css/base.css";
   #detail {
     height: 100vh;
     position: relative;

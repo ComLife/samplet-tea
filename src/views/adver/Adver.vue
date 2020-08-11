@@ -63,6 +63,7 @@
 </script>
 
 <style scoped lang="scss">
+  @import "../../assets/css/base.css";
   #adver {
     height: 100vh;
   }
