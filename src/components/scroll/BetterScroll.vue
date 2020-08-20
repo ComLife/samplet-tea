@@ -12,30 +12,25 @@
           <div v-show="!isPullingDown"><span>Refresh success</span></div>
         </div>
       </div>
-      <div v-show="loadingStatus.showIcon || loadingStatus.status" class="loading-pos">
-        <div v-show="loadingStatus.showIcon" class="loading-container">
-          <div class="cube">
-            <div class="side side1"></div>
-            <div class="side side2"></div>
-            <div class="side side3"></div>
-            <div class="side side4"></div>
-            <div class="side side5"></div>
-            <div class="side side6"></div>
-          </div>
-        </div>
-        <span class="loading-connecting">{{loadingStatus.status}}</span>
-      </div>
       <slot></slot>
+      <div class="pullup-wrapper">
+        <div v-if="!isPullUpLoad" class="before-trigger">
+          <span class="pullup-txt">Pull up and load more</span>
+        </div>
+        <div v-else class="after-trigger">
+          <span class="pullup-txt">Loading...</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
   import BScroll from 'better-scroll'
 
-  const TIME_BOUNCE = 800
-  const TIME_STOP = 600
-  const THRESHOLD = 70
-  const STOP = 56
+  const TIME_BOUNCE = 800;
+  const TIME_STOP = 600;
+  const THRESHOLD = 70;
+  const STOP = 56;
 
   export default {
     props: {
@@ -104,7 +99,7 @@
        */
       refreshDelay: {
         type: Number,
-        default: 20
+        default: 50
       },
       /**
        * 如果启用loading交互，传递loading的状态
@@ -140,7 +135,7 @@
       return {
         beforePullDown: true,
         isPullingDown: false,
-
+        isPullUpLoad: false,
       };
     },
     mounted() {
@@ -159,9 +154,9 @@
           probeType: this.probeType,
           click: this.click,
           scrollX: this.scrollX,
-
-          bounceTime: TIME_BOUNCE,  //设置回弹动画的动画时长
           observeDOM: true,
+          pullUpLoad: true,
+          bounceTime: TIME_BOUNCE,
           pullDownRefresh: {
             threshold: THRESHOLD,
             stop: STOP
@@ -169,15 +164,10 @@
         });
 
         // 是否派发滚动事件
-        if (this.listenScroll || this.pulldown || this.pullup) {
-          let me = this;
+        if (this.listenScroll) {
           this.scroll.on('scroll', (pos) => {
             if (this.listenScroll) {
-              me.$emit('scroll', pos);
-            }
-
-            if (this.pullup) {
-              console.log('11111111111111')
+              this.$emit('scroll', pos);
             }
           })
         }
@@ -185,17 +175,18 @@
         // 是否派发滚动到底部事件，用于上拉加载
         if (this.pullup) {
           this.scroll.on('scrollEnd', () => {
-            console.log('scrollEnd');
-            console.log(this.scroll);
+            this.isPullUpLoad = true;
             // 滚动到底部
             if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
-              this.$emit('scrollToEnd');
+              this.$emit('pullUp');
             }
           });
         }
 
         // 是否派发顶部下拉事件，用于下拉刷新
         if (this.pulldown) {
+          this.beforePullDown = true;
+          this.isPullingDown = false;
           this.scroll.on('pullingDown', this.pullingDownHandler)
         }
 
@@ -206,31 +197,33 @@
           });
         }
       },
+
       async pullingDownHandler() {
-        this.beforePullDown = false
-        this.isPullingDown = true
-
+        this.beforePullDown = false;
+        this.isPullingDown = true;
         // 这个位置就可以开始发送请求了
-        this.$emit('pulldown');
-
-        // 假设调用的接口
-        setTimeout(()=>{
-          this.finishPullDown();
-        }, 1000)
+        this.$emit('pullDown');
 
       },
 
-      // 请求完成后需要回调的函数
+      // 上拉拉请求完成后需要回调的函数
+      finishPullUp(){
+        this.isPullUpLoad = false;
+        this.scroll.finishPullUp();
+        this.scroll.refresh();
+      },
+
+      // 下拉请求完成后需要回调的函数
       async finishPullDown() {
-        this.isPullingDown = false
+        this.isPullingDown = false;
         await new Promise(resolve => {
           setTimeout(() => {
-            this.scroll.finishPullDown()
+            this.scroll.finishPullDown();
             resolve()
           }, TIME_STOP)
-        })
+        });
         setTimeout(() => {
-          this.beforePullDown = true
+          this.beforePullDown = true;
           this.refresh()
         }, TIME_BOUNCE)
       },
@@ -258,7 +251,7 @@
     },
     watch: {
       // 监听数据的变化，延时refreshDelay时间后调用refresh方法重新计算，保证滚动效果正常
-      data() {
+      isPullUpLoad() {
         setTimeout(() => {
           this.refresh();
         }, this.refreshDelay);
@@ -270,26 +263,6 @@
   $cube-size: 10px; // 项目中用了scss，没用的话，替换掉样式中的变量即可
   .better-scroll-root {
 
-    .loading-pos, .pulldown-tip {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 35px;
-      color: #fcfcfc;
-      text-align: center;
-      z-index: 2000;
-    }
-    .loading-pos {
-
-    }
-    .pulldown-tip {
-      top: -50px;
-      height: 50px;
-      line-height: 50px;
-      z-index: 1;
-      color: #000;
-    }
     .pulldown-wrapper{
       position: absolute;
       width: 100%;
@@ -299,6 +272,12 @@
       text-align: center;
       color: #999;
     }
+    .pullup-wrapper{
+      padding: 20px;
+      text-align: center;
+      color: #999;
+    }
+
     .loading-pos {
       background-color: rgba(7, 17, 27, 0.7);
     }
@@ -310,70 +289,10 @@
       font-size: 1.5em;
       transition: all 0.15s ease-in-out;
     }
-    .pull-icon.icon-rotate {
+    .pull-icon .icon-rotate {
       transform:rotate(180deg);
     }
 
-    .loading-container {
-      position: absolute;
-      height: $cube-size;
-      width: $cube-size;
-      left: 35%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      perspective: 40px;
-    }
-    .loading-connecting {
-      line-height: 35px;
-    }
-    .cube{
-      height:$cube-size;
-      width:$cube-size;
-      transform-origin:50% 50%;
-      transform-style:preserve-3d;
-      animation:rotate 3s infinite ease-in-out;
-    }
-    .side{
-      position:absolute;
-      height:$cube-size;
-      width:$cube-size;
-      border-radius:50%;
-    }
-    .side1{
-      background: #4bc393;
-      transform:translateZ($cube-size);
-    }
-    .side2{
-      background:#FF884D;
-      transform:rotateY(90deg) translateZ($cube-size);
-    }
-    .side3{
-      background:#32526E;
-      transform:rotateY(180deg) translateZ($cube-size);
-    }
-    .side4{
-      background: #c53fa3;
-      transform:rotateY(-90deg) translateZ($cube-size);
-    }
-    .side5{
-      background:#FFCC5C;
-      transform:rotateX(90deg) translateZ($cube-size);
-    }
-    .side6{
-      background:#FF6B57;
-      transform:rotateX(-90deg) translateZ($cube-size);
-    }
 
-    @keyframes rotate{
-      0%{
-        transform:rotateX(0deg) rotateY(0deg);
-      }
-      50%{
-        transform:rotateX(360deg) rotateY(0deg);
-      }
-      100%{
-        transform:rotateX(360deg) rotateY(360deg);
-      }
-    }
   }
 </style>

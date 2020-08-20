@@ -37,19 +37,19 @@
     data() {
       return {
         topMessage: [
-          // {
-          //   title: '武汉三镇桑拿会所皆可安排 欢迎微信ha853y qq241889918',
-          //   userName: '一爆到底',
-          //   LeavMessageNum: 10
-          // }, {
-          //   title: '武汉三镇桑拿会所皆可安排 欢迎微信ha853y qq241889918',
-          //   userName: '一爆到底',
-          //   LeavMessageNum: 10
-          // }, {
-          //   title: '武汉三镇桑拿会所皆可安排 欢迎微信ha853y qq241889918',
-          //   userName: '一爆到底',
-          //   LeavMessageNum: 10
-          // },
+          {
+            title: '武汉三镇桑拿会所皆可安排 欢迎微信ha853y qq241889918',
+            userName: '一爆到底',
+            LeavMessageNum: 10
+          }, {
+            title: '武汉三镇桑拿会所皆可安排 欢迎微信ha853y qq241889918',
+            userName: '一爆到底',
+            LeavMessageNum: 10
+          }, {
+            title: '武汉三镇桑拿会所皆可安排 欢迎微信ha853y qq241889918',
+            userName: '一爆到底',
+            LeavMessageNum: 10
+          },
         ],
       }
     },
