@@ -5,25 +5,45 @@
         </div>
         <div class="input-wrapper">
             <div class="border-wrapper">
-                <input type="text" name="username" class="border-item" placeholder="账号">
+                <input v-model="userName" type="text" name="username" class="border-item" placeholder="账号">
             </div>
             <div class="border-wrapper">
-                <input type="password" name="password" class="border-item" placeholder="密码">
+                <input v-model="password" type="password" name="password" class="border-item" placeholder="密码">
             </div>
             <div class="border-wrapper">
-                <input type="confirmPassword" name="confirmPassword" class="border-item" placeholder="确认密码">
+                <input v-model="confirmPwd" type="confirmPassword" name="confirmPassword" class="border-item" placeholder="确认密码">
             </div>
         </div>
         <div class="action">
-            <div class="btn">注册</div>
+            <div class="btn" @click="registerClick">注册</div>
         </div>
     </div>
 </template>
 
 <script>
+    import {register} from "../../../server/request";
+
     export default {
         name: 'Login',
-        components: {}
+        components: {},
+        data(){
+            return{
+                userName: '',
+                password: '',
+                confirmPwd: '',
+            }
+        },
+        methods: {
+            registerClick(){
+                console.log('11111111')
+                register({
+                    username: this.userName,
+                    password: this.password
+                }).then((res)=>{
+                    console.log('1111111=', res);
+                })
+            }
+        }
     }
 </script>
 
