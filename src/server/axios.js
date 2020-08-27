@@ -6,11 +6,11 @@ if (process.env.NODE_ENV === 'development') {
 } else if (process.env.NODE_ENV === 'debug') {
   axios.defaults.baseURL = '/origin'
 } else if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = '/origin'
+  axios.defaults.baseURL = 'http://121.40.53.82'
 }
 
 axios.defaults.timeout = 5000;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8;multipart/form-data';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 axios.withCredentials = true;
 
 // // 请求拦截器

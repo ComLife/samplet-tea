@@ -1,5 +1,8 @@
 <template>
     <div class="form-wrapper">
+        <div class="backBox" @click="$router.go(-1)">
+            <img src="../../../assets/img/common/whiteBack.svg" alt="">
+        </div>
         <div class="header">
             注册
         </div>
@@ -11,7 +14,7 @@
                 <input v-model="password" type="password" name="password" class="border-item" placeholder="密码">
             </div>
             <div class="border-wrapper">
-                <input v-model="confirmPwd" type="confirmPassword" name="confirmPassword" class="border-item" placeholder="确认密码">
+                <input v-model="confirmPwd" type="password" name="confirmPassword" class="border-item" placeholder="确认密码">
             </div>
         </div>
         <div class="action">
@@ -35,19 +38,30 @@
         },
         methods: {
             registerClick(){
-                console.log('11111111')
-                register({
-                    username: this.userName,
-                    password: this.password
-                }).then((res)=>{
-                    console.log('1111111=', res);
-                })
-            }
+                if(this.userName.length&& this.password.length){
+                    if(this.password === this.confirmPwd){
+                        register({
+                            username: this.userName,
+                            password: this.password
+                        }).then((res)=>{
+                            console.log('1111111=', res);
+                        }).catch((err)=>{
+                            console.log(err)
+                        })
+                    }else{
+                        this.$toast('两次输入的密码不一样')
+                    }
+
+                }else{
+                    this.$toast('请输入账号或者密码')
+                }
+
+            },
         }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .form-wrapper {
         width: 100%;
         height: 100%;
@@ -55,6 +69,22 @@
         color: #fff;
         border-radius: 2px;
         padding: 50px;
+        position: relative;
+
+        .backBox{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            top: 10px;
+            left: 20px;
+            >img{
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 
     .form-wrapper .header {

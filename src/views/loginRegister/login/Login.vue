@@ -5,15 +5,15 @@
         </div>
         <div class="input-wrapper">
             <div class="border-wrapper">
-                <input type="text" name="username" class="border-item" placeholder="账号">
+                <input v-model="userName" type="text" name="username" class="border-item" placeholder="账号">
             </div>
             <div class="border-wrapper">
-                <input type="password" name="password" class="border-item" placeholder="密码">
+                <input v-model="password" type="password" name="password" class="border-item" placeholder="密码">
             </div>
 
         </div>
         <div class="action">
-            <div class="btn">登录</div>
+            <div class="btn" @click="loginClick">登录</div>
         </div>
         <div class="registerText">
             <router-link to="/register" >还没账号？去注册</router-link>
@@ -23,9 +23,29 @@
 </template>
 
 <script>
+    import {login} from '../../../server/request'
     export default {
         name: 'Login',
-        components: {}
+        components: {},
+        data(){
+            return {
+                userName: '',
+                password: ''
+            }
+        },
+        methods: {
+            loginClick(){
+                if(this.userName && this.password){
+                    login({userName: this.userName, password: this.password}).then((res)=>{
+
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }else{
+                    this.$toast('请输入账号或者密码')
+                }
+            }
+        }
     }
 </script>
 
