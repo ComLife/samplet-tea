@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper" class="better-scroll-root">  <!--该节点需要定位，内容以此节点的盒模型为基础滚动。另外，该节点的背景色配合上拉加载、下拉刷新的UI，正常情况下不可作它用。-->
     <div class="content-bg better-scroll-container">  <!--如果需要调滚动内容的背景色，则改该节点的背景色-->
-      <div class="pulldown-wrapper">
+      <div class="pulldown-wrapper" v-if="pulldown">
         <div v-show="beforePullDown">
           <span>Pull Down and refresh</span>
         </div>
@@ -13,7 +13,7 @@
         </div>
       </div>
       <slot></slot>
-      <div class="pullup-wrapper">
+      <div class="pullup-wrapper" v-if="pullup">
         <div v-if="!isPullUpLoad" class="before-trigger">
           <span class="pullup-txt">Pull up and load more</span>
         </div>
@@ -155,12 +155,12 @@
           click: this.click,
           scrollX: this.scrollX,
           observeDOM: true,
-          pullUpLoad: true,
+          pullUpLoad: false,
           bounceTime: TIME_BOUNCE,
-          pullDownRefresh: {
+          pullDownRefresh: this.pulldown ? {
             threshold: THRESHOLD,
             stop: STOP
-          }
+          } : null
         });
 
         // 是否派发滚动事件
@@ -174,6 +174,7 @@
 
         // 是否派发滚动到底部事件，用于上拉加载
         if (this.pullup) {
+          console.log('111111111122222')
           this.scroll.on('scrollEnd', () => {
             this.isPullUpLoad = true;
             // 滚动到底部
@@ -185,6 +186,7 @@
 
         // 是否派发顶部下拉事件，用于下拉刷新
         if (this.pulldown) {
+          console.log('111111111122222')
           this.beforePullDown = true;
           this.isPullingDown = false;
           this.scroll.on('pullingDown', this.pullingDownHandler)
@@ -203,7 +205,6 @@
         this.isPullingDown = true;
         // 这个位置就可以开始发送请求了
         this.$emit('pullDown');
-
       },
 
       // 上拉拉请求完成后需要回调的函数

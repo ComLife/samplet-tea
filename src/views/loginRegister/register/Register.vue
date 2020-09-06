@@ -25,6 +25,7 @@
 
 <script>
     import {register} from "../../../server/request";
+    import {CODE_STATUS} from "../../../config/enum";
 
     export default {
         name: 'Login',
@@ -44,7 +45,14 @@
                             username: this.userName,
                             password: this.password
                         }).then((res)=>{
-                            console.log('1111111=', res);
+                            if(res.code === CODE_STATUS.success){
+                                this.$router.replace({
+                                    path: '/login',
+                                })
+                            }else{
+                                this.$toast(res.msg)
+                            }
+
                         }).catch((err)=>{
                             console.log(err)
                         })

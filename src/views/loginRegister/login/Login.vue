@@ -24,6 +24,8 @@
 
 <script>
     import {login} from '../../../server/request'
+    import {CODE_STATUS} from "../../../config/enum";
+
     export default {
         name: 'Login',
         components: {},
@@ -36,7 +38,12 @@
         methods: {
             loginClick(){
                 if(this.userName && this.password){
-                    login({userName: this.userName, password: this.password}).then((res)=>{
+                    login({username: this.userName, password: this.password}).then((res)=>{
+                    if(res.code === CODE_STATUS.success){
+                        this.$router.replace({path: '/home'})
+                    } else {
+                        this.$toast(res.msg)
+                    }
 
                     }).catch((err)=>{
                         console.log(err)

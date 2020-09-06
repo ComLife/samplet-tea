@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 } else if (process.env.NODE_ENV === 'debug') {
   axios.defaults.baseURL = '/origin'
 } else if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'http://121.40.53.82'
+  axios.defaults.baseURL = 'http://www.cgo9.cn:8080'
 }
 
 axios.defaults.timeout = 5000;

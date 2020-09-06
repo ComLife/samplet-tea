@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>武汉夜生活</title>
+    <meta name="keywords" content="不夜城，保健，按摩，品茶，新茶，洗脚，大保健，spa">
+    <meta name="description" content="武汉夜生活是一个以娱乐，介绍武汉城市圈的交友平台，是一个放松，娱乐，休闲的好平台">
+    <script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
   </head>
   <body>
     <noscript>
@@ -13,5 +16,12 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+    <script>
+      window.onload = function () {
+        window.viewportUnitsBuggyfill.init({ hacks: window.viewportUnitsBuggyfillHacks });
+      }
+    </script>
   </body>
+
 </html>

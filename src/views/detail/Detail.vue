@@ -10,55 +10,59 @@
         <p class="infoTitle">{{information.title}}</p>
         <info-header style="margin-top: 10px" >
           <p slot="follow" class="follow">关注楼主</p>
-          <p slot="TimeBox">2020-7-20 14:37:31</p>
+          <p slot="TimeBox">{{formate(information.createTime)}}</p>
         </info-header>
 
         <div class="commentMessage">
-          <font size="4"><strong><font color="#ff00"><font face="-apple-system, BlinkSystemFont, &amp;quot;">武汉三镇会所-诚信高端外围上门170 9263 1233【微信同步】 </font></font><font color="#ff0000"><br>
-            <br>
-          </font><font face="-apple-system, BlinkSystemFont, &amp;quot;"><font color="#000000">伴您度过每次的浪漫旅程。不忽悠，不套路，尊重每位顾客，绝对招呼到位，以学生为主，服务为主，亦能满足您提出所有要求。 </font></font><font color="#ff0000"><br>
-            <font style="background-color:yellow"><br>
-            </font></font><font style="background-color:yellow">微信：170 9263 1233备注99 <font color="#ff0000"><br>
-          </font>电话：170 9263 1233 夏茜 欢迎咨询预约 <font color="#ff0000"><br>
-          </font>最新刚下海妹子定能给带来“香妃般的服务，帝王级的享受”！ </font><font color="#ff0000"><br>
-            <br>
-          </font><font color="#0000ff"><font face="-apple-system, BlinkSystemFont, &amp;quot;">引诱强奸★扯衣撕袜★舌吻吞精★扣逼互舔颜射 </font><br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">小妹：16-24岁年轻漂亮服务热情/贴心/听话。 </font><br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">类型：清纯/萝莉/风骚/丰满/高挑/职业型（文秘/模特）/学妹 </font><br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">服务理念：细节决定成败，服务决定口碑。我们严把服务关，制定了严格而完善的服务监查机制。我们的口号是：慢慢选，好好看。 </font><br>
-            <br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">服务项目：可无套，舌吻，车震，野战，可2，可夜。重点可以喷潮，口活一流，不催客不事逼，懂规矩，丝袜高跟齐全，欢迎预定！欢迎加微信爆照。 </font><br>
-            <br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">我们的服务宗旨：不拿套路忽悠你，只用诚信感动你 </font></font><font color="#ff0000"><br>
-            <br>
-          </font><font style="background-color:yellow">电话：170 9263 1233 <font color="#ff0000"><br>
-          </font>微信；170 9263 1233 </font><font color="#ff0000"><br>
-            <br>
-          </font><font color="#ff00ff"><font face="-apple-system, BlinkSystemFont, &amp;quot;">外围上门专区有少量妹子自带独立工作室 </font><br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">【营业时间】全天24小时 </font><br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">各种类型·00·01·02·03·04后·双胞胎·母女·孕妇·萝莉·白虎·洋马·职场OL·良家少妇·大长腿·大奶牛·御姐·淑女·熟女·白小纯·白富美·空姐·网红·护士·幼师·小太妹····大圈·小圈资源都有···25小时小时敬业中··一个电话安排到位！！ </font><br>
-            <br>
-            <font face="-apple-system, BlinkSystemFont, &amp;quot;">外围流程··客人告诉喜欢的类型··这边给您上照片··选中人·发定位房间号·安排妹子出发···需要定金100······周边县市可上门····《注明定金以外在没有见到妹子之前又要钱的均属骗子》</font></font><br>
-            </strong></font>
-          <br>
+<!--          <font size="4"><strong><font color="#ff00"><font face="-apple-system, BlinkSystemFont, &amp;quot;">武汉三镇会所-诚信高端外围上门170 9263 1233【微信同步】 </font></font><font color="#ff0000"><br>-->
+<!--            <br>-->
+<!--          </font><font face="-apple-system, BlinkSystemFont, &amp;quot;"><font color="#000000">伴您度过每次的浪漫旅程。不忽悠，不套路，尊重每位顾客，绝对招呼到位，以学生为主，服务为主，亦能满足您提出所有要求。 </font></font><font color="#ff0000"><br>-->
+<!--            <font style="background-color:yellow"><br>-->
+<!--            </font></font><font style="background-color:yellow">微信：170 9263 1233备注99 <font color="#ff0000"><br>-->
+<!--          </font>电话：170 9263 1233 夏茜 欢迎咨询预约 <font color="#ff0000"><br>-->
+<!--          </font>最新刚下海妹子定能给带来“香妃般的服务，帝王级的享受”！ </font><font color="#ff0000"><br>-->
+<!--            <br>-->
+<!--          </font><font color="#0000ff"><font face="-apple-system, BlinkSystemFont, &amp;quot;">引诱强奸★扯衣撕袜★舌吻吞精★扣逼互舔颜射 </font><br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">小妹：16-24岁年轻漂亮服务热情/贴心/听话。 </font><br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">类型：清纯/萝莉/风骚/丰满/高挑/职业型（文秘/模特）/学妹 </font><br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">服务理念：细节决定成败，服务决定口碑。我们严把服务关，制定了严格而完善的服务监查机制。我们的口号是：慢慢选，好好看。 </font><br>-->
+<!--            <br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">服务项目：可无套，舌吻，车震，野战，可2，可夜。重点可以喷潮，口活一流，不催客不事逼，懂规矩，丝袜高跟齐全，欢迎预定！欢迎加微信爆照。 </font><br>-->
+<!--            <br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">我们的服务宗旨：不拿套路忽悠你，只用诚信感动你 </font></font><font color="#ff0000"><br>-->
+<!--            <br>-->
+<!--          </font><font style="background-color:yellow">电话：170 9263 1233 <font color="#ff0000"><br>-->
+<!--          </font>微信；170 9263 1233 </font><font color="#ff0000"><br>-->
+<!--            <br>-->
+<!--          </font><font color="#ff00ff"><font face="-apple-system, BlinkSystemFont, &amp;quot;">外围上门专区有少量妹子自带独立工作室 </font><br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">【营业时间】全天24小时 </font><br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">各种类型·00·01·02·03·04后·双胞胎·母女·孕妇·萝莉·白虎·洋马·职场OL·良家少妇·大长腿·大奶牛·御姐·淑女·熟女·白小纯·白富美·空姐·网红·护士·幼师·小太妹····大圈·小圈资源都有···25小时小时敬业中··一个电话安排到位！！ </font><br>-->
+<!--            <br>-->
+<!--            <font face="-apple-system, BlinkSystemFont, &amp;quot;">外围流程··客人告诉喜欢的类型··这边给您上照片··选中人·发定位房间号·安排妹子出发···需要定金100······周边县市可上门····《注明定金以外在没有见到妹子之前又要钱的均属骗子》</font></font><br>-->
+<!--            </strong></font>-->
+<!--          <br>-->
+          <p class="content-item" v-for="(item, index) in content" :key="index">{{item}}</p>
+          <img v-for="item in information.files" :key="item" :src="item.filePath" alt="">
+<!--          <div v-html="information.content"></div>-->
+<!--          <img v-for="item in information.files" :key="item" :src="item.filePath" alt="">-->
         </div>
+<!--评论列表的展示-->
+<!--        <div class="commentBox">-->
+<!--          <div class="commentHeader">-->
+<!--            <span>评论列表</span><span>(评论12)</span>-->
+<!--          </div>-->
 
-        <div class="commentBox">
-          <div class="commentHeader">
-            <span>评论列表</span><span>(评论12)</span>
-          </div>
+<!--          <div class="commentMess">-->
+<!--            <info-header style="margin-top: 10px" >-->
+<!--              <p slot="follow" class="follow">关注楼主</p>-->
+<!--              <p slot="TimeBox">2020-7-20 14:37:31</p>-->
+<!--            </info-header>-->
+<!--            <div class="commentText">-->
+<!--              伴您度过每次的浪漫旅程。不忽悠，不套路，尊重每位顾客，绝对招呼到位，以学生为主，服务为主，亦能满足您提出所有要求。&nbsp;&nbsp;微信：170 9263 1233备注55 电话：170 9263 1233 夏茜 欢迎咨询预约 最新刚下海妹子定能给带来“香妃般的服务，帝王级的享受”！&nbsp;&nbsp;引诱强奸★扯衣撕袜★舌吻吞精★扣逼互舔颜射 小妹：16-24岁年轻漂亮服务热情-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="commentMess">
-            <info-header style="margin-top: 10px" >
-              <p slot="follow" class="follow">关注楼主</p>
-              <p slot="TimeBox">2020-7-20 14:37:31</p>
-            </info-header>
-            <div class="commentText">
-              伴您度过每次的浪漫旅程。不忽悠，不套路，尊重每位顾客，绝对招呼到位，以学生为主，服务为主，亦能满足您提出所有要求。&nbsp;&nbsp;微信：170 9263 1233备注55 电话：170 9263 1233 夏茜 欢迎咨询预约 最新刚下海妹子定能给带来“香妃般的服务，帝王级的享受”！&nbsp;&nbsp;引诱强奸★扯衣撕袜★舌吻吞精★扣逼互舔颜射 小妹：16-24岁年轻漂亮服务热情
-            </div>
-          </div>
-
-        </div>
+<!--        </div>-->
       </div>
     </scroll>
   </div>
@@ -68,6 +72,10 @@
   import NavBar from '../../components/navbar/NavBar'
   import Scroll from '../../components/scroll/BetterScroll'
   import InfoHeader from '../../components/infoHeader/InfoHeader'
+  import {detailPost} from "../../server/request";
+  import {CODE_STATUS} from "../../config/enum";
+  import {formatDate} from "../../utils/utils"
+
   export default {
     name: 'App',
     components: {
@@ -77,18 +85,31 @@
     },
     data(){
       return {
-        information:''
+        information:'',
+        content: [],
       }
     },
 
     created(){
-      this.information = JSON.parse(this.$route.query.item)
+      detailPost({id: this.$route.query.id}).then((res)=>{
+        if(res.code === CODE_STATUS.success){
+          this.information = res.data;
+          this.content = res.data.content.split('#') || [];
+        }else{
+          this.$toast(res.msg)
+        }
+      });
+      // this.information = JSON.parse(this.$route.query.id)
     },
 
     methods: {
       backClick() {
         this.$router.back()
       },
+
+      formate(data){
+        return formatDate(data);
+      }
     }
   }
 </script>
@@ -98,7 +119,7 @@
   #detail {
     height: 100vh;
     position: relative;
-    z-index: 1;
+    z-index: 10;
     background-color: #fff;
   }
   .nav-bar {
@@ -115,6 +136,48 @@
 
     .commentMessage{
       padding: 10px 15px 0;
+
+      .content-item{
+        margin-bottom: 20px;
+        text-indent:2em;
+        font-weight: bold;
+        line-height: 1.5;
+      }
+      img{
+        width: 100%;
+      }
+    }
+
+    .commentMessage p:first-of-type{
+      color: red;
+    }
+
+    .commentMessage p:nth-of-type(2){
+      color: #f0f;
+    }
+
+    .commentMessage p:nth-of-type(3){
+      color: #f0f;
+    }
+
+    .commentMessage p:nth-of-type(4){
+      color: #f0f;
+    }
+
+    .commentMessage p:nth-of-type(5){
+      color: #00f;
+    }
+
+    .commentMessage p:nth-of-type(6){
+      background-color: #ff0;
+    }
+
+    .commentMessage p:nth-of-type(7){
+      background-color: #ff0;
+    }
+
+    .commentMessage p:last-of-type{
+      margin-bottom: 50px;
     }
 
     .infoTitle{

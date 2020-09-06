@@ -27,12 +27,23 @@
 <script>
   import NavBar from '../../components/navbar/NavBar'
   import Scroll from '../../components/scroll/BetterScroll'
+  import {forumPost} from "../../server/request";
+  import {CODE_STATUS} from "../../config/enum";
 
   export default {
     name: 'App',
     components: {
       NavBar,
       Scroll
+    },
+    created(){
+      forumPost({pageNo: 1}).then((res)=>{
+        if(res.code === CODE_STATUS.success){
+          this.topMessage = res.data;
+        }else{
+          this.$toast(res.msg)
+        }
+      })
     },
     data() {
       return {
@@ -55,8 +66,8 @@
     },
     methods: {
       toDetail(item) {
-        console.log('item=', item)
-        this.$router.push({path: '/detail', query: {item: JSON.stringify(item)}})
+        console.log('item=', item);
+        this.$router.push({path: '/detail', query: {id: item.id}})
       }
     }
   }
