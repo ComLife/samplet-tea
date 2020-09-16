@@ -80,10 +80,13 @@ export const floatMul = (arg1, arg2) => {
   try {
     m += s1.split(".")[1].length
   } catch (e) {
+    console.log(e)
   }
   try {
     m += s2.split(".")[1].length
-  } catch (e) {}
+  } catch (e) {
+    console.log(e)
+  }
   return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
 }
 
@@ -93,10 +96,13 @@ export const floatDiv = (arg1, arg2) => {
   let t1 = 0, t2 = 0, r1, r2;
   try {
     t1 = arg1.toString().split(".")[1].length
-  } catch (e) {}
+  } catch (e) {
+    console.log(e)
+  }
   try {
     t2 = arg2.toString().split(".")[1].length
   } catch (e) {
+      console.log(e)
   }
   r1 = Number(arg1.toString().replace(".", ""));
   r2 = Number(arg2.toString().replace(".", ""));
@@ -173,7 +179,7 @@ export const Utils = {
   mergeDeep(target) {
     let tempObj = Array.isArray(target) ? [] : {};
     for (let key in target) {
-      tempObj[key] = Utils.isObject(target[key]) ? Util.mergeDeep(target[key]) : target[key];
+      tempObj[key] = Utils.isObject(target[key]) ? Utils.mergeDeep(target[key]) : target[key];
     }
     return tempObj;
   },
@@ -348,11 +354,11 @@ export const Utils = {
       case 'money':   //金额(小数点2位)
         return /^\d*(?:\.\d{0,2})?$/.test(str);
       case 'URL':     //网址
-        return /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/.test(str)
+        return /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?/.test(str)
       case 'IP':      //IP
         return /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(str);
       case 'date':    //日期时间
-        return /^(\d{4})\-(\d{2})\-(\d{2}) (\d{2})(?:\:\d{2}|:(\d{2}):(\d{2}))$/.test(str) || /^(\d{4})\-(\d{2})\-(\d{2})$/.test(str)
+        return /^(\d{4})-(\d{2})-(\d{2}) (\d{2})(?::\d{2}|:(\d{2}):(\d{2}))$/.test(str) || /^(\d{4})-(\d{2})-(\d{2})$/.test(str)
       case 'number':  //数字
         return /^[0-9]$/.test(str);
       case 'positiveInteger':  //正整数
@@ -463,9 +469,9 @@ export const Utils = {
       while (s.length <= rs + 2) {
         s += '0';
       }
+      //千分位打逗号
+      return (s + '').replace(/(\d{1,3})(?=(\d{3})+(?:$|\.))/g, "$1,");
     }
-    //千分位打逗号
-    return (s + '').replace(/(\d{1,3})(?=(\d{3})+(?:$|\.))/g, "$1,");
   },
   //emoji判断
   isEmojiCharacter(substring) {
@@ -543,10 +549,12 @@ export const Utils = {
     try {
       t1 = arg1.toString().split(".")[1].length;
     } catch (e) {
+      console.log(e)
     }
     try {
       t2 = arg2.toString().split(".")[1].length;
     } catch (e) {
+      console.log(e)
     }
     r1 = Number(arg1.toString().replace(".", ""));
     r2 = Number(arg2.toString().replace(".", ""));
@@ -559,11 +567,13 @@ export const Utils = {
       e = arg2.toString();
     try {
       c += d.split(".")[1].length;
-    } catch (f) {
+    } catch (e) {
+      console.log(e)
     }
     try {
       c += e.split(".")[1].length;
-    } catch (f) {
+    } catch (e) {
+      console.log(e)
     }
     return Number(d.replace(".", "")) * Number(e.replace(".", "")) / Math.pow(10, c);
   },
